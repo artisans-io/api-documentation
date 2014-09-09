@@ -19,10 +19,10 @@ Rejestracja wymaga potwierdzenia poprawności adresu email poprzez kliknięcie w
 
 + Request (application/json)
      
-			{
-			    "email": "adres@example.com",
-			    "password": "your-strong-password-here"
-			}
+            {
+                "email": "adres@example.com",
+                "password": "your-strong-password-here"
+            }
 
 + Response 202 (application/json)
 
@@ -46,7 +46,7 @@ Aby korzystać z usługi po poprawnej rejestracji należy się zalogować, aby o
 
 + Parameters
 
-	+ embed (optional, string) ... do obiektu data dodany jest obiekt user
+    + embed (optional, string) ... do obiektu data dodany jest obiekt user
 
 ### Logowanie [POST]
 
@@ -91,14 +91,14 @@ Token może być przesyłany jako nagłówkek wiadomości HTTP, gdzie poprawna n
 
 + Response 200 (application/json)
 
-			{
-			    "data": [{
-			        "token": "some-token-value",
-			        "agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.78.2",
-			        "created_at": 1404835858,
-			        "expire_at": 1404840000,
-			    }]
-			}
+            {
+                "data": [{
+                    "token": "some-token-value",
+                    "agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.78.2",
+                    "created_at": 1404835858,
+                    "expire_at": 1404840000,
+                }]
+            }
 
 # Group Mój profil
 
@@ -109,32 +109,32 @@ Token może być przesyłany jako nagłówkek wiadomości HTTP, gdzie poprawna n
 
     + Body
 
-			{
-			    "data": {
-		            "id": "uuid",
-		            "avatar": "https://example.com/avatar.png",
-		            "firstname": "Dawid",
-		            "lastname": "Nowakowski",
-		            "email": "dawid.nowakowski@icloud.com",
-		            "created_at": 1404835858,
-		            "updated_at": 1404835858,
-		            "lat": 53.864698,
-		            "lon": 18.251917
-			    },
-			    "token": "0xXfkubrWAGHZ0LEAlg2gVjULnzcbSGbqDqL8Cc4cSLcTwRtS"
-			}
+            {
+                "data": {
+                    "id": "uuid",
+                    "avatar": "https://example.com/avatar.png",
+                    "firstname": "Dawid",
+                    "lastname": "Nowakowski",
+                    "email": "dawid.nowakowski@icloud.com",
+                    "created_at": 1404835858,
+                    "updated_at": 1404835858,
+                    "lat": 53.864698,
+                    "lon": 18.251917
+                },
+                "token": "0xXfkubrWAGHZ0LEAlg2gVjULnzcbSGbqDqL8Cc4cSLcTwRtS"
+            }
 
 ### Aktualizacja danych [PUT]
 
 + Request (application/json)
 
-			{
-			    "firstname": "",
-			    "lastname": "",
-			    "email": "",
-			    "lat": 50.061389,
-			    "lon": 19.938333
-			}
+            {
+                "firstname": "",
+                "lastname": "",
+                "email": "",
+                "lat": 50.061389,
+                "lon": 19.938333
+            }
 
 + Response 204
   
@@ -142,12 +142,12 @@ Token może być przesyłany jako nagłówkek wiadomości HTTP, gdzie poprawna n
 
     + Body
     
-			{
-			    "error": {
-			        "code": "error.validation"
-			    },
-			    "message": "Niepoprawny adres email."
-			}
+            {
+                "error": {
+                    "code": "error.validation"
+                },
+                "message": "Niepoprawny adres email."
+            }
 
 ### Usunięcie konta [DELETE]
 
@@ -166,31 +166,31 @@ Trwałe usunięcie konta wymaga potwierdzenia przez kliknięcie w link wysyłany
 ### Uaktualnij avatar [POST]
 
 + Response 200 (application/json)
-		
-		{
-			 "data": {
-		        "avatar": "http://example.com/avatar-new-url.png"
-		    }
-		}
+        
+        {
+             "data": {
+                "avatar": "http://example.com/avatar-new-url.png"
+            }
+        }
 
 + Response 400 (application/json)
 
-		{
-			 "error": {
-		        "code": "api.error.avatar_size_too_big"
-		    },
-		    "message": "Rozmiar avatara jest za duży."
-		}
+        {
+             "error": {
+                "code": "api.error.avatar_size_too_big"
+            },
+            "message": "Rozmiar avatara jest za duży."
+        }
 
 ### Uaktualnij avatar [DELETE]
 
 + Response 200 (application/json)
-		
-		{
-			 "data": {
-		        "avatar": "http://example.com/avatar-default.png"
-		    }
-		}
+        
+        {
+             "data": {
+                "avatar": "http://example.com/avatar-default.png"
+            }
+        }
 
 # Group Użytkownicy
 
@@ -199,24 +199,24 @@ Trwałe usunięcie konta wymaga potwierdzenia przez kliknięcie w link wysyłany
 ### Lista użytkowników [GET]
 + Response 200 (application/json)
 
-		{
-			 "pagination": {
-		        "total": 1,
-		        "limit": 10,
-		        "offset": 0
-		    },
-		    "data": [{
-		        "id": "uuid",
-		        "avatar": "https://example.com/avatar.png",
-		        "firstname": "Dawid",
-		        "lastname": "Nowakowski",
-		        "email": "dawid.nowakowski@icloud.com",
-		        "created_at": 1404835858,
-		        "updated_at": 1404835858,
-		        "lat": 53.864698,
-		        "lon": 18.251917
-		    }]
-		}
+        {
+             "pagination": {
+                "total": 1,
+                "limit": 10,
+                "offset": 0
+            },
+            "data": [{
+                "id": "uuid",
+                "avatar": "https://example.com/avatar.png",
+                "firstname": "Dawid",
+                "lastname": "Nowakowski",
+                "email": "dawid.nowakowski@icloud.com",
+                "created_at": 1404835858,
+                "updated_at": 1404835858,
+                "lat": 53.864698,
+                "lon": 18.251917
+            }]
+        }
 
 ## Użytkownik [/users/{id}]
 
@@ -227,25 +227,25 @@ Szczegółowe informacje o danym użytkowniku.
 
 ### Pobierz [GET]
 + Response 200 (application/json)
-		
-		{
-		    "pagination": {
-		        "total": 1,
-		        "limit": 10,
-		        "offset": 0
-		    },
-		    "data": [{
-		        "id": "uuid",
-		        "avatar": "https://example.com/avatar.png",
-		        "firstname": "Dawid",
-		        "lastname": "Nowakowski",
-		        "email": "dawid.nowakowski@icloud.com",
-		        "created_at": 1404835858,
-		        "updated_at": 1404835858,
-		        "lat": 53.864698,
-		        "lon": 18.251917
-		    }]
-		}
+        
+        {
+            "pagination": {
+                "total": 1,
+                "limit": 10,
+                "offset": 0
+            },
+            "data": [{
+                "id": "uuid",
+                "avatar": "https://example.com/avatar.png",
+                "firstname": "Dawid",
+                "lastname": "Nowakowski",
+                "email": "dawid.nowakowski@icloud.com",
+                "created_at": 1404835858,
+                "updated_at": 1404835858,
+                "lat": 53.864698,
+                "lon": 18.251917
+            }]
+        }
 
 ### Uaktualnij dane [PUT]
 
@@ -253,13 +253,13 @@ Dostęp do tej metody wymaga uprawnień administratora.
 
 + Request (application/json)
 
-			{
-			    "firstname": "",
-			    "lastname": "",
-			    "email": "",
-			    "lat": 50.061389,
-			    "lon": 19.938333
-			}
+            {
+                "firstname": "",
+                "lastname": "",
+                "email": "",
+                "lat": 50.061389,
+                "lon": 19.938333
+            }
 
 + Response 204
 
@@ -278,53 +278,53 @@ Papuga jest usługą, która dla wybranych metod HTTP zwraca wszystkie parametry
 ### GET [GET]
 
 + Response 200 (application/json)
-		
-		{
-		    "headers": {
-		        "content-type": "application/json"
-		    },
-		    "data": {
-		        "sample_key_1": "recived_value_1",
-		        "sample_key_2": "recived_value_2"
-		    }
-		}
+        
+        {
+            "headers": {
+                "content-type": "application/json"
+            },
+            "data": {
+                "sample_key_1": "recived_value_1",
+                "sample_key_2": "recived_value_2"
+            }
+        }
 
 ### POST [POST]
 
 + Request (application/json)
-		
-		{
-		    "sample_key_1": "recived_value_1",
-		    "sample_key_2": "recived_value_2"
-		}
+        
+        {
+            "sample_key_1": "recived_value_1",
+            "sample_key_2": "recived_value_2"
+        }
 
 + Response 200 (application/json)
 
 
-		{
-		    "headers": {
-		        "content-type": "application/json"
-		    },
-		    "data": {
-		        "sample_key_1": "recived_value_1",
-		        "sample_key_2": "recived_value_2"
-		    }
-		}
+        {
+            "headers": {
+                "content-type": "application/json"
+            },
+            "data": {
+                "sample_key_1": "recived_value_1",
+                "sample_key_2": "recived_value_2"
+            }
+        }
 
 ### PUT [PUT]
 
 + Response 200 (application/json)
 
         
-		{
-		    "headers": {
-		        "content-type": "application/json"
-		    },
-		    "data": {
-		        "sample_key_1": "recived_value_1",
-		        "sample_key_2": "recived_value_2"
-		    }
-		}
+        {
+            "headers": {
+                "content-type": "application/json"
+            },
+            "data": {
+                "sample_key_1": "recived_value_1",
+                "sample_key_2": "recived_value_2"
+            }
+        }
         
 ### DELETE [DELETE]
 
@@ -340,50 +340,50 @@ Namespace powinno być zawsze skrótem (np. od nazwy projektu) oraz powinno być
 
 + Response 200 (application/json)
         
-		{
-		    "pagination": {
-		        "total": 2,
-		        "limit": 10,
-		        "offset": 0
-		    },
-		    "data": [
-		        "namespace": "FF",
-		        "namespace": "KRK"
-		    ]
-		}
+        {
+            "pagination": {
+                "total": 2,
+                "limit": 10,
+                "offset": 0
+            },
+            "data": [
+                "namespace": "FF",
+                "namespace": "KRK"
+            ]
+        }
 
 ## Lista błędów [/bugs/{namespace}]
 
 + Parameters
-	+ namespace (optional, string) ... Skrócona nazwa projektu.
+    + namespace (optional, string) ... Skrócona nazwa projektu.
 
 ### Pobierz [GET]
 
 + Response 200 (application/json)
 
-		{
-		    "pagination": {
-		        "total": 1
-		    },
-		    "data": [{
-		        "id": "uuid-6",
-		        "content": "This is a bug description.",
-		        "priority": 0.85,
-		        "status": "open",
-		        "namespace": "KRK",
-		        "created_at": 1405699047,
-		        "updated_at": 1405699047
-		    }]
-		}
+        {
+            "pagination": {
+                "total": 1
+            },
+            "data": [{
+                "id": "uuid-6",
+                "content": "This is a bug description.",
+                "priority": 0.85,
+                "status": "open",
+                "namespace": "KRK",
+                "created_at": 1405699047,
+                "updated_at": 1405699047
+            }]
+        }
 
 ### Dodaj [POST]
 
 + Request (application/json)
-			
-		{
-		    "content": "This is a bug description.",
-		    "priority": 0.63
-		}
+            
+        {
+            "content": "This is a bug description.",
+            "priority": 0.63
+        }
 
 + Response 204
 
@@ -393,26 +393,26 @@ Namespace powinno być zawsze skrótem (np. od nazwy projektu) oraz powinno być
 
 + Response 200 (application/json)
 
-		{
-		    "data": {
-		        "id": "bug-uuid",
-		        "content": "This is a bug description.",
-		        "priority": 0.85,
-		        "status": "open",
-		        "created_at": 1405699047,
-		        "updated_at": 1405699047
-		    }
-		}
+        {
+            "data": {
+                "id": "bug-uuid",
+                "content": "This is a bug description.",
+                "priority": 0.85,
+                "status": "open",
+                "created_at": 1405699047,
+                "updated_at": 1405699047
+            }
+        }
 
 ### Uaktualnij [PUT]
 
 + Request (application/json)
-		
-		{
-		    "content": "This is a bug description.",
-		    "priority": 0.85,
-		    "status": "open"
-		}
+        
+        {
+            "content": "This is a bug description.",
+            "priority": 0.85,
+            "status": "open"
+        }
 
 + Response 204
 
@@ -428,23 +428,23 @@ Namespace powinno być zawsze skrótem (np. od nazwy projektu) oraz powinno być
 
 + Response 200 (application/json)
 
-		{
-		    "data": [{
-		        "currency": "złoty",
-		        "code": "PLN",
-		        "symbol": "PLN",
-		        "price": {
-		            "conversion": 1.00,
-		            "buy": 1.00,
-		            "sell": 1.00
-		        }
-		    }]
-		}
+        {
+            "data": [{
+                "currency": "złoty",
+                "code": "PLN",
+                "symbol": "PLN",
+                "price": {
+                    "conversion": 1.00,
+                    "buy": 1.00,
+                    "sell": 1.00
+                }
+            }]
+        }
         
 ## Formatowanie walut [/currencies/format/{?language_code}]
 
 + Parameters
-	+ language_code (required, string, `pl_PL`) ... Kod kraju oraz kod języka.
+    + language_code (required, string, `pl_PL`) ... Kod kraju oraz kod języka.
 
 ### Formatowanie walut [GET]
 
@@ -452,17 +452,17 @@ Poprawne wyświetlenie danych za pomocą tej metody wymaga podmiany pojedyńczeg
 
 + Response 200 (application/json)
 
-		{
-		    "data": [{
-		        "prefiks": "$ ",
-		        "surfix": "",
-		        "decimal_numbers": 2,
-		        "delimiters": {
-		            "thousands": ",",
-		            "decimal": "."
-		        },
-		    }]
-		}
+        {
+            "data": [{
+                "prefiks": "$ ",
+                "surfix": "",
+                "decimal_numbers": 2,
+                "delimiters": {
+                    "thousands": ",",
+                    "decimal": "."
+                },
+            }]
+        }
 
 ## Języki [/languages{?all}]
 ### Lista języków [GET]
@@ -507,30 +507,30 @@ Poprawne wyświetlenie danych za pomocą tej metody wymaga podmiany pojedyńczeg
 
 + Response 200 (application/json)
  
-			{
-			    "pagination": {
-			        "total": 2,
-			        "limit": 10,
-			        "offset": 0
-			    },
-			    "data": [{
-			        "geonameid": "1",
-			        "name": "Sant Juli\u00e0 de L\u00f2ria",
-			        "asciiname": "Sant Julia de Loria",
-			        "lat": 42.4637,
-			        "lon": 1.49129,
-			        "feature_code": "PPLA",
-			        "country_code": "ad"
-			    }, {
-			        "geonameid": "2",
-			        "name": "Ordino",
-			        "asciiname": "Ordino",
-			        "lat": 42.5562,
-			        "lon": 1.53319,
-			        "feature_code": "PPLA",
-			        "country_code": "ad"
-			    }]
-			}
+            {
+                "pagination": {
+                    "total": 2,
+                    "limit": 10,
+                    "offset": 0
+                },
+                "data": [{
+                    "geonameid": "1",
+                    "name": "Sant Juli\u00e0 de L\u00f2ria",
+                    "asciiname": "Sant Julia de Loria",
+                    "lat": 42.4637,
+                    "lon": 1.49129,
+                    "feature_code": "PPLA",
+                    "country_code": "ad"
+                }, {
+                    "geonameid": "2",
+                    "name": "Ordino",
+                    "asciiname": "Ordino",
+                    "lat": 42.5562,
+                    "lon": 1.53319,
+                    "feature_code": "PPLA",
+                    "country_code": "ad"
+                }]
+            }
 
 ## Lista lotnisk [/airports/{?search,lat,lon,radius,limit,offset,country_code}]
 
@@ -543,28 +543,28 @@ Lista wszystkich lotnisk.
 
 + Response 200 (application/json)
 
-		{
-		    "pagination": {
-		        "total": 1,
-		        "limit": 20,
-		        "offset": 0,
-		        "before": 1400032610
-		    },
-		    "data": [{
-		        "id": "cdee3db0-3143-11e4-8c21-0800200c9a66",
-		        "code": "KRK",
-		        "name": "John Paul II Balice International",
-		        "lat": 50.08861160,
-		        "lon": 20.22055626,
-		        "country_code": "pl",
-		        "description": {
-		            "format": "plain",
-		            "content": "Admin Description of airport"
-		        },
-		        "updated_at": 1400033715,
-		        "created_at": 1400033715
-		    }, ]
-		}
+        {
+            "pagination": {
+                "total": 1,
+                "limit": 20,
+                "offset": 0,
+                "before": 1400032610
+            },
+            "data": [{
+                "id": "cdee3db0-3143-11e4-8c21-0800200c9a66",
+                "code": "KRK",
+                "name": "John Paul II Balice International",
+                "lat": 50.08861160,
+                "lon": 20.22055626,
+                "country_code": "pl",
+                "description": {
+                    "format": "plain",
+                    "content": "Admin Description of airport"
+                },
+                "updated_at": 1400033715,
+                "created_at": 1400033715
+            }, ]
+        }
 
 ## Lista miejsc [/places/{?search,limit,lat,lon,radius,type}]
 
@@ -578,27 +578,27 @@ Lista wszystkich lotnisk.
 
 + Response 200 (application/json)
 
-		{
-		    "pagination": {
-		        "total": 1,
-		        "limit": 20,
-		        "offset": 0
-		    },
-		    "data": [{
-		        "id": "4f7a29d0-3148-11e4-8c21-0800200c9a66",
-		        "name": "Some Fancy Restaurant",
-		        "lat": 50.08861160,
-		        "lon": 20.22055626,
-		        "types": [
-		            "food",
-		            "drinks"
-		        ],
-		        "country_code": "pl",
-		        "remarks": "Some less important stuff",
-		        "updated_at": 1400033715,
-		        "created_at": 1400033715
-		    }]
-		}
+        {
+            "pagination": {
+                "total": 1,
+                "limit": 20,
+                "offset": 0
+            },
+            "data": [{
+                "id": "4f7a29d0-3148-11e4-8c21-0800200c9a66",
+                "name": "Some Fancy Restaurant",
+                "lat": 50.08861160,
+                "lon": 20.22055626,
+                "types": [
+                    "food",
+                    "drinks"
+                ],
+                "country_code": "pl",
+                "remarks": "Some less important stuff",
+                "updated_at": 1400033715,
+                "created_at": 1400033715
+            }]
+        }
             
 # Group Biblioteka
 
@@ -608,22 +608,22 @@ Lista wszystkich lotnisk.
 
 + Response 200 (application/json)
 
-{
-    "pagination": {
-        "total": 1,
-        "limit": 10,
-        "offset": 0
-    },
-    "data": [{
-        "id": "uuid",
-        "title": "36 tydzie\u0144. Cz. 1",
-        "isbn": "978-83-7554-340-7",
-        "author": "Sofie Sarenbrant ",
-        "publisher": "Wydawnictwo Czarna Owca",
-        "year": "2012",
-        "cover": "http://poznajxcode.pl/media/book-covers/356a192b7913b04c54574d18c28d46e6395428ab.jpg"
-    }]
-}
+        {
+            "pagination": {
+                "total": 1,
+                "limit": 10,
+                "offset": 0
+            },
+            "data": [{
+                "id": "uuid",
+                "title": "36 tydzie\u0144. Cz. 1",
+                "isbn": "978-83-7554-340-7",
+                "author": "Sofie Sarenbrant ",
+                "publisher": "Wydawnictwo Czarna Owca",
+                "year": "2012",
+                "cover": "http://poznajxcode.pl/media/book-covers/356a192b7913b04c54574d18c28d46e6395428ab.jpg"
+            }]
+        }
 
 # Group Sklep
 
@@ -633,41 +633,41 @@ Lista wszystkich lotnisk.
 
 + Response 200 (application/json)
 
-		{
-		    "pagination": {
-		        "total": 1,
-		        "limit": 0,
-		        "offset": 0
-		    },
-		    "data": [{
-		        "id": "uuid",
-		        "name": "Grosik Inc."
-		    }]
-		}
-		
+        {
+            "pagination": {
+                "total": 1,
+                "limit": 0,
+                "offset": 0
+            },
+            "data": [{
+                "id": "uuid",
+                "name": "Grosik Inc."
+            }]
+        }
+        
 ### Dodaj [POST]
 
 + Request
-	
-		{
-		    "name": ""
-		}
-		
+    
+        {
+            "name": ""
+        }
+        
 + Response 204
 
 ## Sklep [/shops/{?id}]
 
 + Parameters
-	+ id (required, string) ... Numer id sklepu
+    + id (required, string) ... Numer id sklepu
 
 ### Uaktualnij [PUT]
 
 + Request
-	
-		{
-		    "name": ""
-		}
-		
+    
+        {
+            "name": ""
+        }
+        
 + Response 204
 
 ### Usuń [DELETE]
@@ -679,79 +679,79 @@ Lista wszystkich lotnisk.
 ### Pobierz listę [GET]
 
 + Parameters
-	+ id (required, string) ... Numer id sklepu
-	+ limit = `0` (optional, number) ... Zero oznacza brak limitu danych
-	+ offset = `0` (optional, number) ... 
+    + id (required, string) ... Numer id sklepu
+    + limit = `0` (optional, number) ... Zero oznacza brak limitu danych
+    + offset = `0` (optional, number) ... 
 
 + Response 200 (application/json)
 
-		{
-		    "pagination": {
-		        "total": 1,
-		        "limit": 0,
-		        "offset": 0
-		    },
-		    "data": [{
-		        "id": "some-uuid",
-		        "name": "",
-		        "billing_address": {
-		            "email": "",
-		            "address_1": "",
-		            "address_2": "",
-		            "zipcode": "",
-		            "city": "",
-		            "country_code": "pl",
-		        },
-		        "contact_address": {
-		            "email": "",
-		            "address_1": "",
-		            "address_2": "",
-		            "zipcode": "",
-		            "city": "",
-		            "country_code": "pl",
-		        },
-		        "delivery_addresses": [{
-		            "email": "",
-		            "address_1": "",
-		            "address_2": "",
-		            "zipcode": "",
-		            "city": "",
-		            "country_code": "pl",
-		        }]
-		    }]
-		}
+        {
+            "pagination": {
+                "total": 1,
+                "limit": 0,
+                "offset": 0
+            },
+            "data": [{
+                "id": "some-uuid",
+                "name": "",
+                "billing_address": {
+                    "email": "",
+                    "address_1": "",
+                    "address_2": "",
+                    "zipcode": "",
+                    "city": "",
+                    "country_code": "pl",
+                },
+                "contact_address": {
+                    "email": "",
+                    "address_1": "",
+                    "address_2": "",
+                    "zipcode": "",
+                    "city": "",
+                    "country_code": "pl",
+                },
+                "delivery_addresses": [{
+                    "email": "",
+                    "address_1": "",
+                    "address_2": "",
+                    "zipcode": "",
+                    "city": "",
+                    "country_code": "pl",
+                }]
+            }]
+        }
             
 ### Dodaj [POST]
 
 + Request
-	
-		{
-		    "name": "",
-		    "billing_address": {
-		        "email": "",
-		        "address_1": "",
-		        "address_2": "",
-		        "zipcode": "",
-		        "city": "",
-		        "country_code": "pl",
-		    },
-		    "contact_address": {
-		        "email": "",
-		        "address_1": "",
-		        "address_2": "",
-		        "zipcode": "",
-		        "city": "",
-		        "country_code": "pl",
-		    },
-		    "delivery_addresses": [{
-		        "email": "",
-		        "address_1": "",
-		        "address_2": "",
-		        "zipcode": "",
-		        "city": "",
-		        "country_code": "pl",
-		    }]
-		}
+    
+        {
+            "name": "",
+            "billing_address": {
+                "email": "",
+                "address_1": "",
+                "address_2": "",
+                "zipcode": "",
+                "city": "",
+                "country_code": "pl",
+            },
+            "contact_address": {
+                "email": "",
+                "address_1": "",
+                "address_2": "",
+                "zipcode": "",
+                "city": "",
+                "country_code": "pl",
+            },
+            "delivery_addresses": [{
+                "email": "",
+                "address_1": "",
+                "address_2": "",
+                "zipcode": "",
+                "city": "",
+                "country_code": "pl",
+            }]
+        }
 
 + Response 204
 
