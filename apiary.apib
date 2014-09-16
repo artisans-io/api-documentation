@@ -347,17 +347,23 @@ Namespace powinno być zawsze skrótem (np. od nazwy projektu) oraz powinno być
                 "offset": 0
             },
             "data": [
-                "namespace": "FF",
-                "namespace": "KRK"
+                {
+                    "namespace": "FF"
+                },
+                {
+                    "namespace": "KRK"
+                }
             ]
         }
 
-## Lista błędów [/bugs/{namespace}]
+## Lista błędów [/bugs/{?namespace}]
 
 + Parameters
     + namespace (optional, string) ... Skrócona nazwa projektu.
 
 ### Pobierz [GET]
+
+Jeśli parametr `namespace` jest pominięty zwracane są wszystkie rekordy niezależnie od przynależności do namespace.
 
 + Response 200 (application/json)
 
@@ -377,6 +383,8 @@ Namespace powinno być zawsze skrótem (np. od nazwy projektu) oraz powinno być
         }
 
 ### Dodaj [POST]
+
+Przynależność nowego rekordu do odpowiedniego namespace jest na podstawie wartości `namespace` w query string. Wartość `namespace` w *post body* jest ignorowana.
 
 + Request (application/json)
             
