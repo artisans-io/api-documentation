@@ -663,7 +663,7 @@ Lista wszystkich lotnisk.
         
 + Response 204
 
-## Sklep [/shops/{?id}]
+## Sklep [/shops/{id}]
 
 + Parameters
     + id (required, string) ... Numer id sklepu
@@ -761,7 +761,43 @@ Lista wszystkich lotnisk.
             }]
         }
 
-+ Response 204
++ Response 201 (application/json)
+
+        {
+            "pagination": {
+                "total": 1,
+                "limit": 0,
+                "offset": 0
+            },
+            "data": [{
+                "id": "some-uuid",
+                "name": "",
+                "billing_address": {
+                    "email": "",
+                    "address_1": "",
+                    "address_2": "",
+                    "zipcode": "",
+                    "city": "",
+                    "country_code": "pl",
+                },
+                "contact_address": {
+                    "email": "",
+                    "address_1": "",
+                    "address_2": "",
+                    "zipcode": "",
+                    "city": "",
+                    "country_code": "pl",
+                },
+                "delivery_addresses": [{
+                    "email": "",
+                    "address_1": "",
+                    "address_2": "",
+                    "zipcode": "",
+                    "city": "",
+                    "country_code": "pl",
+                }]
+            }]
+        }
 
 ### Usuń [DELETE]
 
