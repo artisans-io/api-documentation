@@ -24,12 +24,18 @@ Rejestracja wymaga potwierdzenia poprawności adresu email poprzez kliknięcie w
                 "password": "your-strong-password-here"
             }
 
-+ Response 202 (application/json)
++ Response 201 (application/json)
 
         {
-            "data": {},
-            "message" : "Rejestracja zakończona sukcesem. Sprawdź skrzynkę pocztową i potwierdź adres email."
+            "data": {
+                "success": {
+                    "message": "User created successfully",
+                    "key": "api.auth.info.user_created"
+                }
+            }
         }
+
+        
 
 + Response 400 (application/json)
 
@@ -38,6 +44,13 @@ Rejestracja wymaga potwierdzenia poprawności adresu email poprzez kliknięcie w
                 "code" : "error.email_already_registered"
             }
             "message" : "Email jest zajęty."
+        }
+        
+        {
+            "error": {
+                "key": "The email field is required.",
+                "message": "The email field is required."
+            }
         }
 
 ## Logowanie [/auth/login{?embed}]
