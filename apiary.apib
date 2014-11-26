@@ -182,7 +182,7 @@ Trwałe usunięcie konta wymaga potwierdzenia przez kliknięcie w link wysyłany
             "message": "Rozmiar avatara jest za duży."
         }
 
-### Uaktualnij avatar [DELETE]
+### Usunięcie avatar [DELETE]
 
 + Response 200 (application/json)
         
@@ -200,22 +200,31 @@ Trwałe usunięcie konta wymaga potwierdzenia przez kliknięcie w link wysyłany
 + Response 200 (application/json)
 
         {
-             "pagination": {
-                "total": 1,
-                "limit": 10,
-                "offset": 0
-            },
-            "data": [{
-                "id": "uuid",
-                "avatar": "https://example.com/avatar.png",
-                "firstname": "Dawid",
-                "lastname": "Nowakowski",
-                "email": "dawid.nowakowski@icloud.com",
-                "created_at": 1404835858,
-                "updated_at": 1404835858,
-                "lat": 53.864698,
-                "lon": 18.251917
-            }]
+            "data": [
+                {
+                    "id": "fbe06463-84be-xxx-xxx-8717a9e799ab",
+                    "avatar": "https://d11570mjfj6i5h.cloudfront.net/avatar.jpg",
+                    "firstname": "John",
+                    "lastname": "Doe",
+                    "email": "john.doe@gmail.com",
+                    "created_at": 1416238889,
+                    "updated_at": 14170123535
+                },
+                {
+                    "id": "77cb6599-6554-xxx-xxx-2e63b47682cf",
+                    "avatar": "https://d11570mjfj6i5h.cloudfront.net/avatar.jpg",
+                    "firstname": Settem,
+                    "lastname": Brinix,
+                    "email": "settembrinix@gmail.com",
+                    "created_at": 1414272699,
+                    "updated_at": 1414272699
+                }
+            ],
+            "pagination": {
+                "offset": 0,
+                "limit": 20,
+                "total": n
+            }
         }
 
 ## Użytkownik [/users/{id}]
