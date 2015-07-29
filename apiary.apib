@@ -7,24 +7,24 @@ HOST: https://api.artisans.io
 
 Dokumentacja przedstawia listę dostępnych metod oraz wymaganych parametrów do usługi Artisans.io. Usługa ta, została stworzona wyłącznie w celach edukacyjnych, aby umożliwić naukę korzystania z REST API między innymi z platform iOS, HTML5 czy Android.
 
-Obecnie usługa jest w trybie BETA i jest bezpłatna dla wszystkich zarejestowanych użytkowników.
+Obecnie usługa jest w trybie BETA i jest bezpłatna dla wszystkich zarejestrowanych użytkowników.
 
 # Group Autoryzacja
 
 ## Rejestracja [/auth/register]
 
-Rejestracja wymaga potwierdzenia poprawności adresu email poprzez kliknięcie w link .
+Obecnie rejestracja nie wymaga potwierdzenia poprawności adresu email.
 
 ### Rejestracja [POST]
 
-+ Request (application/json)
++ Request
      
             {
                 "email": "adres@example.com",
-                "password": "your-strong-password-here"
+                "password": "minimum-8-characters"
             }
 
-+ Response 201 (application/json)
++ Response 201
 
         {
             "data": {
@@ -37,7 +37,7 @@ Rejestracja wymaga potwierdzenia poprawności adresu email poprzez kliknięcie w
 
         
 
-+ Response 400 (application/json)
++ Response 400
 
         {
             "error": {
@@ -46,13 +46,9 @@ Rejestracja wymaga potwierdzenia poprawności adresu email poprzez kliknięcie w
             }
         }
 
-## Logowanie [/auth/login{?embed}]
+## Logowanie [/auth/login]
 
-Aby korzystać z usługi po poprawnej rejestracji należy się zalogować, aby otrzymać token.
-
-+ Parameters
-
-    + embed (optional, string) ... do obiektu data dodany jest obiekt user
+Aby korzystać z usługi po poprawnej rejestracji należy się zalogować, aby otrzymać token sesji.
 
 ### Logowanie [POST]
 
@@ -60,7 +56,7 @@ Aby korzystać z usługi po poprawnej rejestracji należy się zalogować, aby o
 
         {
             "data": {
-                "token": "vnODxve22HVs...EJ4YYKrKCNNXDu32jM3ePXO"
+                "token": "YOUR_80_CHARACTERS_SESSION_TOKEN_STRING"
             }
         }
 
@@ -74,29 +70,26 @@ Token może być przesyłany jako nagłówkek wiadomości HTTP, gdzie poprawna n
 
 ### Użycie tokenu [GET]
 
-+ Request (application/json)
++ Request
 
     + Headers
 
-            X-Access-Token: cdteNwW6rpeKok4FAABrUEgEQ3EqNju0xXfkubrWAGHZ0LEAlg2gVjULnzcbSGbqDqL8Cc4cSLcTwRtS
+            X-Access-Token: YOUR_80_CHARACTERS_SESSION_TOKEN_STRING
 
-    + Body
-
-            {}
-
-+ Response 200 (application/json)
++ Response 200
 
             {
                 "data": [
                     {
-                        "token": "bmnbndPbHAvHAwuaesZXr..........zrVH26yGQIpCAB9eGj4VWcwY6C6rQbl5DB3",
-                        "agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_10) AppleWebKit\/600.1.25 (KHTML, like Gecko) Version\/8.0 Safari\/600.1.25",
-                        "created_at": 141....867,
-                        "expire_at": 141....467,
-                        "last_request_at": 141....933
+                        "token": "YOUR_80_CHARACTERS_SESSION_TOKEN_STRING",
+                        "agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_10)",
+                        "created_at": 1414774893,
+                        "expire_at": 1605373293,
+                        "last_request_at": 1431041158
                     }
                 ]
             }
+
 
 
 # Group Mój profil
@@ -104,7 +97,7 @@ Token może być przesyłany jako nagłówkek wiadomości HTTP, gdzie poprawna n
 ## Mój profil [/profile]
 
 ### Podstawowe dane [GET]
-+ Response 200 (application/json)
++ Response 200
 
     + Body
 
@@ -117,55 +110,39 @@ Token może być przesyłany jako nagłówkek wiadomości HTTP, gdzie poprawna n
                     "email": "john.doe@gmail.com",
                     "created_at": 1416238889,
                     "updated_at": 14170123535
-                },
-                "token": null
+                }
             }
             
 
 ### Aktualizacja danych [PUT]
 
-+ Request 200 (application/json)
++ Request 200
 
             {
-                "data": {
-                    "id": "fbe06463-84be-xxx-xxx-8717a9e799ab",
-                    "avatar": "https://d11570mjfj6i5h.cloudfront.net/avatar.jpg",
-                    "firstname": "John",
-                    "lastname": "Doe",
-                    "email": "john.doe@gmail.com",
-                    "created_at": 1416238889,
-                    "updated_at": 14170123535
-                }
+                "firstname": "John",
+                "lastname": "Doe"
             }
 
-+ Response 400 (application/json)
++ Response 400
 
     + Body
     
             {
                 "error": {
-                    "code": "error.validation"
+                    "code": "error.validation",
+                    "message": "Niepoprawny adres email."
                 },
-                "message": "Niepoprawny adres email."
+                
             }
 
-### Usunięcie konta [DELETE]
 
-Trwałe usunięcie konta wymaga potwierdzenia przez kliknięcie w link wysyłany w wiadomości email.
 
-+ Response 202 (application/json)
-    + Body
-    
-            {
-                "data": {},
-                "message" : "Sprawdź skrzynkę email. Konto zostanie usunięte po poprawnej weryfikacji."
-            }
 
 ## Avatar [/avatar/]
 
 ### Uaktualnij avatar [POST]
 
-+ Response 200 (application/json)
++ Response 200
         
         {
              "data": {
@@ -173,108 +150,16 @@ Trwałe usunięcie konta wymaga potwierdzenia przez kliknięcie w link wysyłany
             }
         }
 
-+ Response 400 (application/json)
++ Response 400
 
         {
              "error": {
-                "code": "api.error.avatar_size_too_big"
-            },
-            "message": "Rozmiar avatara jest za duży."
+                "code": "api.error.avatar_size_too_big",
+                "message": "Rozmiar avatara jest za duży."
+            }
         }
 
 ### Usunięcie avatar [DELETE]
-
-+ Response 200 (application/json)
-        
-        {
-             "data": {
-                "avatar": "http://example.com/avatar-default.png"
-            }
-        }
-
-# Group Użytkownicy
-
-## Lista użytkowników [/users]
-
-### Lista użytkowników [GET]
-+ Response 200 (application/json)
-
-        {
-            "data": [
-                {
-                    "id": "fbe06463-84be-xxx-xxx-8717a9e799ab",
-                    "avatar": "https://d11570mjfj6i5h.cloudfront.net/avatar.jpg",
-                    "firstname": "John",
-                    "lastname": "Doe",
-                    "email": "john.doe@gmail.com",
-                    "created_at": 1416238889,
-                    "updated_at": 14170123535
-                },
-                {
-                    "id": "77cb6599-6554-xxx-xxx-2e63b47682cf",
-                    "avatar": "https://d11570mjfj6i5h.cloudfront.net/avatar.jpg",
-                    "firstname": Settem,
-                    "lastname": Brinix,
-                    "email": "settembrinix@gmail.com",
-                    "created_at": 1414272699,
-                    "updated_at": 1414272699
-                }
-            ],
-            "pagination": {
-                "offset": 0,
-                "limit": 20,
-                "total": n
-            }
-        }
-
-## Użytkownik [/users/{id}]
-
-Szczegółowe informacje o danym użytkowniku.
-
-+ Parameters
-    + id (required, string, `e4eaaaf2-d142-11e1-b3e4-080027620cdd`) ... String `id` jest unikalny.
-
-### Pobierz [GET]
-+ Response 200 (application/json)
-        
-        {
-            "pagination": {
-                "total": 1,
-                "limit": 10,
-                "offset": 0
-            },
-            "data": [{
-                "id": "uuid",
-                "avatar": "https://example.com/avatar.png",
-                "firstname": "Dawid",
-                "lastname": "Nowakowski",
-                "email": "dawid.nowakowski@icloud.com",
-                "created_at": 1404835858,
-                "updated_at": 1404835858,
-                "lat": 53.864698,
-                "lon": 18.251917
-            }]
-        }
-
-### Uaktualnij dane [PUT]
-
-Dostęp do tej metody wymaga uprawnień administratora.
-
-+ Request (application/json)
-
-            {
-                "firstname": "",
-                "lastname": "",
-                "email": "",
-                "lat": 50.061389,
-                "lon": 19.938333
-            }
-
-+ Response 204
-
-### Usuń użytkownika [DELETE]
-
-Dostęp do tej metody wymaga uprawnień administratora.
 
 + Response 204
 
@@ -339,6 +224,7 @@ Papuga jest usługą, która dla wybranych metod HTTP zwraca wszystkie parametry
 
 + Response 204
 
+
 # Group Administracja
 
 ## Lista projektów [/bugs/namespaces]
@@ -347,25 +233,25 @@ Namespace powinno być zawsze skrótem (np. od nazwy projektu) oraz powinno być
 
 ### Metoda GET [GET]
 
-+ Response 200 (application/json)
++ Response 200
         
         {
-            "pagination": {
-                "total": 2,
-                "limit": 10,
-                "offset": 0
-            },
             "data": [
                 {
-                    "namespace": "FF"
+                    "namespace": "WAW"
                 },
                 {
                     "namespace": "KRK"
                 }
-            ]
+            ],
+            "pagination": {
+                "total": 2,
+                "limit": 10,
+                "offset": 0
+            }
         }
 
-## Lista błędów [/bugs/{?namespace}]
+## Lista błędów [/bugs]
 
 + Parameters
     + namespace (optional, string) ... Skrócona nazwa projektu.
@@ -374,32 +260,37 @@ Namespace powinno być zawsze skrótem (np. od nazwy projektu) oraz powinno być
 
 Jeśli parametr `namespace` jest pominięty zwracane są wszystkie rekordy niezależnie od przynależności do namespace.
 
-+ Response 200 (application/json)
++ Response 200
 
         {
+            "data": [
+                {
+                    "id": "1234",
+                    "content": "Use this field to describe bug.",
+                    "priority": 0.85,
+                    "status": "open",
+                    "namespace": "KRK",
+                    "created_at": 1405699047,
+                    "updated_at": 1405699047
+                }
+            ],
             "pagination": {
-                "total": 1
-            },
-            "data": [{
-                "id": "uuid-6",
-                "content": "This is a bug description.",
-                "priority": 0.85,
-                "status": "open",
-                "namespace": "KRK",
-                "created_at": 1405699047,
-                "updated_at": 1405699047
-            }]
+                "total": 1,
+                "limit": 10,
+                "offset": 0
+            }
         }
 
 ### Dodaj [POST]
 
-Przynależność nowego rekordu do odpowiedniego namespace jest na podstawie wartości `namespace` w query string. Wartość `namespace` w *post body* jest ignorowana.
+Parametr `namespace` jest opcjonalny.
 
-+ Request (application/json)
++ Request
             
         {
             "content": "This is a bug description.",
-            "priority": 0.63
+            "priority": 0.63,
+            "namespace": "KRK"
         }
 
 + Response 204
@@ -408,13 +299,13 @@ Przynależność nowego rekordu do odpowiedniego namespace jest na podstawie war
 
 ### Pobierz [GET]
 
-+ Response 200 (application/json)
++ Response 200
 
         {
             "data": {
-                "id": "bug-uuid",
+                "id": "5678",
                 "content": "This is a bug description.",
-                "priority": 0.85,
+                "priority": 0.63,
                 "status": "open",
                 "created_at": 1405699047,
                 "updated_at": 1405699047
@@ -423,87 +314,64 @@ Przynależność nowego rekordu do odpowiedniego namespace jest na podstawie war
 
 ### Uaktualnij [PUT]
 
-+ Request (application/json)
++ Request
         
         {
-            "content": "This is a bug description.",
+            "content": "This is a better bug description.",
             "priority": 0.85,
-            "status": "open"
+            "status": "closed"
         }
 
-+ Response 204
++ Response 200
+
+        {
+            "data": {
+                "id": "5678",
+                "content": "This is a better bug description.",
+                "priority": 0.85,
+                "status": "closed",
+                "created_at": 1405699047,
+                "updated_at": 1405699047
+            }
+        }
 
 ### Usuń [DELETE]
 
 + Response 204
 
-# Group Lokalizacja
+# Group Biblioteka
 
-## Lista walut [/currencies]
+## Lista książek [/books/{?limit,offset}]
 
-### Lista walut [GET]
+### Pobierz listę [GET]
 
-+ Response 200 (application/json)
-
-        {
-            "data": [{
-                "currency": "złoty",
-                "code": "PLN",
-                "symbol": "PLN",
-                "price": {
-                    "conversion": 1.00,
-                    "buy": 1.00,
-                    "sell": 1.00
-                }
-            }]
-        }
-        
-## Formatowanie walut [/currencies/format/{?language_code}]
-
-+ Parameters
-    + language_code (required, string, `pl_PL`) ... Kod kraju oraz kod języka.
-
-### Formatowanie walut [GET]
-
-Poprawne wyświetlenie danych za pomocą tej metody wymaga podmiany pojedyńczego znaku dolara (`$`) na poprawny symbol waluty, którą chcemy wyświetlić (dotyczy pól prefix oraz surfix).
-
-+ Response 200 (application/json)
-
-        {
-            "data": [{
-                "prefiks": "$ ",
-                "surfix": "",
-                "decimal_numbers": 2,
-                "delimiters": {
-                    "thousands": ",",
-                    "decimal": "."
-                },
-            }]
-        }
-
-## Języki [/languages{?all}]
-### Lista języków [GET]
-
-+ Parameters
-    + all = `false` (optional, boolean, `true`) ... Jeśli wartość jest `false` w odpowiedzi powinny być tylko dostępne języki.
-
-+ Response 200 (application/json)
++ Response 200
 
         {
             "data": [
-                "en_GB" : "English (UK)",
-                "en_US" : "English (US)",
-                "..." : "...",
-                "es_ES" : "Español (España)",
-                "de_DE" : "Deutsch",
-                "pl_PL" : "Polski"
-            ]
+                {
+                    "id"        : "dbc173e55fad441bb15195d16954f05c",
+                    "isbn"      : "978-83-240-2247-2",
+                    "title"     : "Alibi na szczęście. Cz. 1",
+                    "author"    : "Anna Ficner-Ogonowska",
+                    "cover"     : "https://d11570mjfj6i5h.cloudfront.net/books/1b6453892473a467d07372d45eb05abc2031647a.jpg",
+                    "publisher" : "Społeczny Instytut Wydawniczy Znak",
+                    "year"      : 2012,
+                }
+            ],
+            "pagination": {
+                "total": 414,
+                "limit": 20,
+                "offset": 0
+            }
         }
+
+# Group Lokalizacja
 
 ## Państwa [/countries]
 ### Lista państw [GET]
 
-+ Response 200 (application/json)
++ Response 200
 
         {
             "data": [
@@ -514,300 +382,40 @@ Poprawne wyświetlenie danych za pomocą tej metody wymaga podmiany pojedyńczeg
             ]
         }
 
-# Group Miejsca
 
 ## Lista miast [/cities{?country_code}]
+
 ### Pobierz listę [GET]
 
 + Parameters
     + country_code (optional, string) ... Dwuliterowy kod państwa według standardu ISO 3166-2 przykładowo: `us`, `de`, `fr`, `nl`, `pl`.
 
-+ Response 200 (application/json)
++ Response 200
  
             {
+                "data": [
+                    {
+                        "geonameid": "1",
+                        "name": "Sant Julià de Lòria",
+                        "asciiname": "Sant Julia de Loria",
+                        "lat": 42.4637,
+                        "lon": 1.49129,
+                        "feature_code": "PPLA",
+                        "country_code": "ad"
+                    },
+                    {
+                        "geonameid": "2",
+                        "name": "Ordino",
+                        "asciiname": "Ordino",
+                        "lat": 42.5562,
+                        "lon": 1.53319,
+                        "feature_code": "PPLA",
+                        "country_code": "ad"
+                    }
+                ],
                 "pagination": {
                     "total": 2,
                     "limit": 10,
                     "offset": 0
-                },
-                "data": [{
-                    "geonameid": "1",
-                    "name": "Sant Juli\u00e0 de L\u00f2ria",
-                    "asciiname": "Sant Julia de Loria",
-                    "lat": 42.4637,
-                    "lon": 1.49129,
-                    "feature_code": "PPLA",
-                    "country_code": "ad"
-                }, {
-                    "geonameid": "2",
-                    "name": "Ordino",
-                    "asciiname": "Ordino",
-                    "lat": 42.5562,
-                    "lon": 1.53319,
-                    "feature_code": "PPLA",
-                    "country_code": "ad"
-                }]
+                }
             }
-
-## Lista lotnisk [/airports/{?search,lat,lon,radius,limit,offset,country_code}]
-
-Lista wszystkich lotnisk.
-
-+ Parameters
-    + search (optional, string) ... Wyszukiwanie po kodzie lotniska lub jego nazwie.
-
-### Pobierz listę [GET]
-
-+ Response 200 (application/json)
-
-        {
-            "pagination": {
-                "total": 1,
-                "limit": 20,
-                "offset": 0,
-                "before": 1400032610
-            },
-            "data": [{
-                "id": "cdee3db0-3143-11e4-8c21-0800200c9a66",
-                "code": "KRK",
-                "name": "John Paul II Balice International",
-                "lat": 50.08861160,
-                "lon": 20.22055626,
-                "country_code": "pl",
-                "description": {
-                    "format": "plain",
-                    "content": "Admin Description of airport"
-                },
-                "updated_at": 1400033715,
-                "created_at": 1400033715
-            }, ]
-        }
-
-## Lista miejsc [/places/{?search,limit,lat,lon,radius,type}]
-
-+ Parameters
-    + search (optional, string) ... Przykłady poprawnych zapytań: search=apple or search=^app or search=ple$
-    + limit = `20` (optional, number) ... Limit zwracanych rekordów
-    + radius = `10` (optional, number) ... Odległość od punktu lat,lon [km]
-    + type = `any` (optional, string, `hotel`) ... Rodzaj miejsca
-
-### Pobierz listę [GET]
-
-+ Response 200 (application/json)
-
-        {
-            "pagination": {
-                "total": 1,
-                "limit": 20,
-                "offset": 0
-            },
-            "data": [{
-                "id": "4f7a29d0-3148-11e4-8c21-0800200c9a66",
-                "name": "Some Fancy Restaurant",
-                "lat": 50.08861160,
-                "lon": 20.22055626,
-                "types": [
-                    "food",
-                    "drinks"
-                ],
-                "country_code": "pl",
-                "remarks": "Some less important stuff",
-                "updated_at": 1400033715,
-                "created_at": 1400033715
-            }]
-        }
-            
-# Group Biblioteka
-
-## Lista książek [/books/{?limit,offset}]
-
-### Pobierz listę [GET]
-
-+ Response 200 (application/json)
-
-        {
-            "pagination": {
-                "total": 1,
-                "limit": 10,
-                "offset": 0
-            },
-            "data": [{
-                "id": "uuid",
-                "title": "36 tydzie\u0144. Cz. 1",
-                "isbn": "978-83-7554-340-7",
-                "author": "Sofie Sarenbrant ",
-                "publisher": "Wydawnictwo Czarna Owca",
-                "year": "2012",
-                "cover": "http://poznajxcode.pl/media/book-covers/356a192b7913b04c54574d18c28d46e6395428ab.jpg"
-            }]
-        }
-
-# Group Sklep
-
-## Lista sklepów [/shops/{?limit,offset}]
-
-### Pobierz listę [GET]
-
-+ Response 200 (application/json)
-
-        {
-            "pagination": {
-                "total": 1,
-                "limit": 0,
-                "offset": 0
-            },
-            "data": [{
-                "id": "uuid",
-                "name": "Grosik Inc."
-            }]
-        }
-        
-### Dodaj [POST]
-
-+ Request
-    
-        {
-            "name": ""
-        }
-        
-+ Response 204
-
-## Sklep [/shops/{id}]
-
-+ Parameters
-    + id (required, string) ... Numer id sklepu
-
-### Uaktualnij [PUT]
-
-+ Request
-    
-        {
-            "name": ""
-        }
-        
-+ Response 204
-
-### Usuń [DELETE]
-
-+ Response 204
-
-## Klienci [/shops/{id}/clients/{?limit,offset}]
-
-### Pobierz listę [GET]
-
-+ Parameters
-    + id (required, string) ... Numer id sklepu
-    + limit = `0` (optional, number) ... Zero oznacza brak limitu danych
-    + offset = `0` (optional, number) ... 
-
-+ Response 200 (application/json)
-
-        {
-            "pagination": {
-                "total": 1,
-                "limit": 0,
-                "offset": 0
-            },
-            "data": [{
-                "id": "some-uuid",
-                "name": "",
-                "billing_address": {
-                    "email": "",
-                    "address_1": "",
-                    "address_2": "",
-                    "zipcode": "",
-                    "city": "",
-                    "country_code": "pl",
-                },
-                "contact_address": {
-                    "email": "",
-                    "address_1": "",
-                    "address_2": "",
-                    "zipcode": "",
-                    "city": "",
-                    "country_code": "pl",
-                },
-                "delivery_addresses": [{
-                    "email": "",
-                    "address_1": "",
-                    "address_2": "",
-                    "zipcode": "",
-                    "city": "",
-                    "country_code": "pl",
-                }]
-            }]
-        }
-            
-### Dodaj [POST]
-
-+ Request
-    
-        {
-            "name": "",
-            "billing_address": {
-                "email": "",
-                "address_1": "",
-                "address_2": "",
-                "zipcode": "",
-                "city": "",
-                "country_code": "pl",
-            },
-            "contact_address": {
-                "email": "",
-                "address_1": "",
-                "address_2": "",
-                "zipcode": "",
-                "city": "",
-                "country_code": "pl",
-            },
-            "delivery_addresses": [{
-                "email": "",
-                "address_1": "",
-                "address_2": "",
-                "zipcode": "",
-                "city": "",
-                "country_code": "pl",
-            }]
-        }
-
-+ Response 201 (application/json)
-
-        {
-            "pagination": {
-                "total": 1,
-                "limit": 0,
-                "offset": 0
-            },
-            "data": [{
-                "id": "some-uuid",
-                "name": "",
-                "billing_address": {
-                    "email": "",
-                    "address_1": "",
-                    "address_2": "",
-                    "zipcode": "",
-                    "city": "",
-                    "country_code": "pl",
-                },
-                "contact_address": {
-                    "email": "",
-                    "address_1": "",
-                    "address_2": "",
-                    "zipcode": "",
-                    "city": "",
-                    "country_code": "pl",
-                },
-                "delivery_addresses": [{
-                    "email": "",
-                    "address_1": "",
-                    "address_2": "",
-                    "zipcode": "",
-                    "city": "",
-                    "country_code": "pl",
-                }]
-            }]
-        }
-
-### Usuń [DELETE]
-
-+ Response 204
